@@ -16,8 +16,8 @@ type StringContentReplace struct {
 }
 
 // NewStringContentReplace 字符串替换
-func NewStringContentReplace(fileName string, old string, new string) Replace {
-	return NewReplace(fileName, TypeStringContent, StringContentReplace{
+func NewStringContentReplace(filename string, old string, new string) Replace {
+	return NewReplace(filename, TypeStringContent, StringContentReplace{
 		Old: old,
 		New: new,
 	})

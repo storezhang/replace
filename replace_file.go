@@ -13,8 +13,8 @@ type FileReplace struct {
 }
 
 // NewFileReplace 文件替换
-func NewFileReplace(fileName string, file transfer.File) Replace {
-	return NewReplace(fileName, TypeFile, FileReplace{File: file})
+func NewFileReplace(filename string, file transfer.File) Replace {
+	return NewReplace(filename, TypeFile, FileReplace{File: file})
 }
 
 func (fr *FileReplace) Replace(filename string) (err error) {

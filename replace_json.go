@@ -25,8 +25,8 @@ type (
 )
 
 // NewFileReplace 文件替换
-func NewJSONReplace(fileName string, elements ...JSONReplaceElement) Replace {
-	return NewReplace(fileName, TypeJSON, JSONReplace{Elements: elements})
+func NewJSONReplace(filename string, elements ...JSONReplaceElement) Replace {
+	return NewReplace(filename, TypeJSON, JSONReplace{Elements: elements})
 }
 
 func (jr *JSONReplace) Replace(filename string) (err error) {

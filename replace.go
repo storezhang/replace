@@ -2,6 +2,7 @@ package replace
 
 import (
 	`encoding/json`
+	`path/filepath`
 )
 
 const (
@@ -96,6 +97,6 @@ func (r Replace) String() string {
 	return string(jsonBytes)
 }
 
-func (r *Replace) Replace(filename string) (err error) {
-	return r.Value.(Replacer).Replace(filename)
+func (r *Replace) Replace(dir string) (err error) {
+	return r.Value.(Replacer).Replace(filepath.Join(dir, r.Filename))
 }

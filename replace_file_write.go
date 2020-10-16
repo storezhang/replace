@@ -13,8 +13,8 @@ type FileWriteReplace struct {
 }
 
 // NewFileWriteReplace 文件内容替换
-func NewFileWriteReplace(fileName string, content string) Replace {
-	return NewReplace(fileName, TypeFileWrite, FileWriteReplace{Content: content})
+func NewFileWriteReplace(filename string, content string) Replace {
+	return NewReplace(filename, TypeFileWrite, FileWriteReplace{Content: content})
 }
 
 func (fwr *FileWriteReplace) Replace(filename string) (err error) {
