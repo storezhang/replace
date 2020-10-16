@@ -1,9 +1,9 @@
 package replace
 
 import (
-	"encoding/json"
+	`encoding/json`
 
-	"github.com/storezhang/transfer"
+	`github.com/storezhang/transfer`
 )
 
 // 文件替换

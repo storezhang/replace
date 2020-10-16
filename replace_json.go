@@ -1,11 +1,11 @@
 package replace
 
 import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
+	`encoding/json`
+	`io/ioutil`
+	`os`
 
-	"github.com/tidwall/sjson"
+	`github.com/tidwall/sjson`
 )
 
 type (

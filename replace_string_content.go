@@ -1,10 +1,10 @@
 package replace
 
 import (
-	"encoding/json"
-	"io/ioutil"
-	"os"
-	"strings"
+	`encoding/json`
+	`io/ioutil`
+	`os`
+	`strings`
 )
 
 // StringContentReplace 文本内容替换

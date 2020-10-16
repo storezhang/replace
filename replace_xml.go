@@ -1,9 +1,9 @@
 package replace
 
 import (
-	"encoding/json"
+	`encoding/json`
 
-	"github.com/beevik/etree"
+	`github.com/beevik/etree`
 )
 
 const (

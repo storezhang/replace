@@ -1,7 +1,7 @@
 package replace
 
 import (
-	"github.com/storezhang/gox"
+	`github.com/storezhang/gox`
 )
 
 var (
