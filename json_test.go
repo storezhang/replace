@@ -1,10 +1,10 @@
 package replace
 
 import (
-	"errors"
-	"io/ioutil"
-	"os"
-	"testing"
+	`errors`
+	`io/ioutil`
+	`os`
+	`testing`
 )
 
 const (
