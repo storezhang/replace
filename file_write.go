@@ -17,7 +17,11 @@ func NewFileWriteReplace(filename string, content string) Replace {
 	return NewReplace(filename, TypeFileWrite, FileWriteReplace{Content: content})
 }
 
-func (fwr *FileWriteReplace) Replace(filename string) (err error) {
+func (fwr FileWriteReplace) Replace(filename string) (err error) {
+	if "" == filename {
+		return
+	}
+
 	return ioutil.WriteFile(filename, []byte(fwr.Content), os.ModePerm)
 }
 

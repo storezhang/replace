@@ -24,12 +24,16 @@ type (
 	}
 )
 
-// NewFileReplace 文件替换
+// NewFileReplace JSON文件修改
 func NewJSONReplace(filename string, elements ...JSONReplaceElement) Replace {
 	return NewReplace(filename, TypeJSON, JSONReplace{Elements: elements})
 }
 
-func (jr *JSONReplace) Replace(filename string) (err error) {
+func (jr JSONReplace) Replace(filename string) (err error) {
+	if "" == filename {
+		return
+	}
+
 	var fileContent []byte
 	if fileContent, err = ioutil.ReadFile(filename); nil != err {
 		return

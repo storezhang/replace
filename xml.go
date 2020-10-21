@@ -7,9 +7,9 @@ import (
 )
 
 const (
-	// 替换属性
+	// XMLReplaceTypeAttr 替换属性
 	XMLReplaceTypeAttr XMLReplaceType = "attr"
-	// 替换文本
+	// XMLReplaceTypeText 替换文本
 	XMLReplaceTypeText XMLReplaceType = "text"
 )
 
@@ -36,6 +36,11 @@ type (
 	}
 )
 
+// NewXMLReplace JSON文件修改
+func NewXMLReplace(filename string, elements ...XMLReplaceElement) Replace {
+	return NewReplace(filename, TypeXML, XMLReplace{Elements: elements})
+}
+
 func (xr XMLReplace) String() string {
 	jsonBytes, _ := json.MarshalIndent(xr, "", "    ")
 
@@ -48,7 +53,11 @@ func (xre XMLReplaceElement) String() string {
 	return string(jsonBytes)
 }
 
-func (xr *XMLReplace) Replace(filename string) (err error) {
+func (xr XMLReplace) Replace(filename string) (err error) {
+	if "" == filename {
+		return
+	}
+
 	xml := etree.NewDocument()
 	if err = xml.ReadFromFile(filename); nil != err {
 		return

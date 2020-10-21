@@ -17,7 +17,11 @@ func NewFileReplace(filename string, file transfer.File) Replace {
 	return NewReplace(filename, TypeFile, FileReplace{File: file})
 }
 
-func (fr *FileReplace) Replace(filename string) (err error) {
+func (fr FileReplace) Replace(filename string) (err error) {
+	if "" == filename {
+		return
+	}
+
 	return fr.File.Download(filename, true)
 }
 

@@ -23,7 +23,11 @@ func NewStringContentReplace(filename string, old string, new string) Replace {
 	})
 }
 
-func (scr *StringContentReplace) Replace(filename string) (err error) {
+func (scr StringContentReplace) Replace(filename string) (err error) {
+	if "" == filename {
+		return
+	}
+
 	var fileContent []byte
 	if fileContent, err = ioutil.ReadFile(filename); nil != err {
 		return
