@@ -1,7 +1,7 @@
 package replace
 
 import (
-	libJSON `encoding/json`
+	`encoding/json`
 	`errors`
 	`io/ioutil`
 	`os`
@@ -24,17 +24,11 @@ const (
 `
 )
 
-// User 测试用户
 type User struct {
-	// Username 用户名
 	Username string `json:"username"`
-	// Password 密码
 	Password string `json:"password"`
-	// School 学校
 	School struct {
-		// Name 名称
 		Name string `json:"name"`
-		// Address 地址
 		Address string `json:"address"`
 	}
 }
@@ -44,7 +38,7 @@ func TestJSON(t *testing.T) {
 		t.Error(err)
 	}
 
-	json := NewJSONReplace(userJSONFilename, JSONReplaceElement{
+	replace := NewJSONReplace(userJSONFilename, JSONReplaceElement{
 		Path:  "username",
 		Value: expectedUsername,
 	}, JSONReplaceElement{
@@ -52,7 +46,7 @@ func TestJSON(t *testing.T) {
 		Value: expectedSchoolName,
 	})
 
-	if err := json.Replace("./"); nil != err {
+	if err := replace.Replace("./"); nil != err {
 		t.Error(err)
 	}
 
@@ -60,7 +54,7 @@ func TestJSON(t *testing.T) {
 		t.Error(err)
 	} else {
 		user := &User{}
-		if err = libJSON.Unmarshal(fileData, user); nil != err {
+		if err = json.Unmarshal(fileData, user); nil != err {
 			t.Error(errors.New("文件修改失败"))
 		}
 
