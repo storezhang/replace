@@ -1,11 +1,11 @@
 package replace
 
 import (
-	`encoding/xml`
-	`errors`
-	`io/ioutil`
-	`os`
-	`testing`
+	"encoding/xml"
+	"errors"
+	"io/ioutil"
+	"os"
+	"testing"
 )
 
 const (
@@ -46,8 +46,11 @@ const (
 )
 
 type AndroidManifest struct {
-	XMLName     xml.Name `xml:"android"`
-	VersionName string   `xml:"versionName,attr"`
+	XMLName xml.Name `xml:"manifest"`
+
+	Manifest struct {
+		VersionName string `xml:"versionName,attr"`
+	} `xml:"http://schemas.android.com/apk/res/android manifest"`
 
 	Extra struct {
 		Username string `xml:"username"`
@@ -93,7 +96,7 @@ func TestXML(t *testing.T) {
 			t.Error(errors.New("文件修改失败"))
 		}
 
-		if expectedVersionName != manifest.VersionName || expectedAndroidLabel != manifest.Application.AndroidLabel || expectedExtraUsername != manifest.Extra.Username {
+		if expectedVersionName != manifest.Manifest.VersionName || expectedAndroidLabel != manifest.Application.AndroidLabel || expectedExtraUsername != manifest.Extra.Username {
 			t.Error(errors.New("文件修改失败"))
 		}
 	}
