@@ -1,6 +1,7 @@
 package replace
 
 import (
+	libJSON `encoding/json`
 	`errors`
 	`io/ioutil`
 	`os`
@@ -8,8 +9,10 @@ import (
 )
 
 const (
-	userJSONFilename = ".testdata/user.json"
-	userJSON         = `
+	userJSONFilename   = ".testdata/user.json"
+	expectedUsername   = "storezhang@gmail.com"
+	expectedSchoolName = "中国电子科技大学"
+	userJSON           = `
 {
   "username": "storezhang",
   "password": "123456",
@@ -19,17 +22,22 @@ const (
   }
 }
 `
-	expectedUserJSON = `
-{
-  "username": "storezhang@gmail.com",
-  "password": "123456",
-  "school": {
-    "name": "中国电子科技大学",
-    "address": "中国 四川 成都"
-  }
-}
-`
 )
+
+// User 测试用户
+type User struct {
+	// Username 用户名
+	Username string `json:"username"`
+	// Password 密码
+	Password string `json:"password"`
+	// School 学校
+	School struct {
+		// Name 名称
+		Name string `json:"name"`
+		// Address 地址
+		Address string `json:"address"`
+	}
+}
 
 func TestJSON(t *testing.T) {
 	if err := ioutil.WriteFile(userJSONFilename, []byte(userJSON), os.ModePerm); nil != err {
@@ -38,10 +46,10 @@ func TestJSON(t *testing.T) {
 
 	json := NewJSONReplace(userJSONFilename, JSONReplaceElement{
 		Path:  "username",
-		Value: "storezhang@gmail.com",
+		Value: expectedUsername,
 	}, JSONReplaceElement{
 		Path:  "school.name",
-		Value: "中国电子科技大学",
+		Value: expectedSchoolName,
 	})
 
 	if err := json.Replace("./"); nil != err {
@@ -50,7 +58,14 @@ func TestJSON(t *testing.T) {
 
 	if fileData, err := ioutil.ReadFile(userJSONFilename); nil != err {
 		t.Error(err)
-	} else if expectedUserJSON != string(fileData) {
-		t.Error(errors.New("文件修改失败"))
+	} else {
+		user := &User{}
+		if err = libJSON.Unmarshal(fileData, user); nil != err {
+			t.Error(errors.New("文件修改失败"))
+		}
+
+		if expectedUsername != user.Username || expectedSchoolName != user.School.Name {
+			t.Error(errors.New("文件修改失败"))
+		}
 	}
 }
