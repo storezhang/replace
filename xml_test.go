@@ -1,11 +1,11 @@
 package replace
 
 import (
-	"encoding/xml"
-	"errors"
-	"io/ioutil"
-	"os"
-	"testing"
+	`encoding/xml`
+	`errors`
+	`io/ioutil`
+	`os`
+	`testing`
 )
 
 const (
