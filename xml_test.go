@@ -46,19 +46,16 @@ const (
 )
 
 type AndroidManifest struct {
-	XMLName xml.Name `xml:"manifest"`
+	XMLName xml.Name `xml:"android manifest"`
 
-	Manifest struct {
-		VersionName string `xml:"versionName,attr"`
-	} `xml:"http://schemas.android.com/apk/res/android manifest"`
+	VersionName string `xml:"android versionName,attr"`
 
 	Extra struct {
 		Username string `xml:"username"`
 	} `xml:"extra"`
 
 	Application struct {
-		XMLName      xml.Name `xml:"android"`
-		AndroidLabel string   `xml:"label,attr"`
+		AndroidLabel string `xml:"android label,attr"`
 	} `xml:"application"`
 }
 
@@ -96,7 +93,7 @@ func TestXML(t *testing.T) {
 			t.Error(errors.New("文件修改失败"))
 		}
 
-		if expectedVersionName != manifest.Manifest.VersionName || expectedAndroidLabel != manifest.Application.AndroidLabel || expectedExtraUsername != manifest.Extra.Username {
+		if expectedVersionName != manifest.VersionName || expectedAndroidLabel != manifest.Application.AndroidLabel || expectedExtraUsername != manifest.Extra.Username {
 			t.Error(errors.New("文件修改失败"))
 		}
 	}

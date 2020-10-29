@@ -1,11 +1,13 @@
-
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.class330.tv" android:versionName="1.0.0">
-    
-    <extra>Storezhang<username>测试用户</username>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.class330.tv"
+          android:versionName="1.0.0">
+
+    <extra>Storezhang
+        <username>测试用户</username>
     </extra>
 
-    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:supportsRtl="true" android:theme="@style/AppTheme" android:label="测试应用">
+    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:supportsRtl="true"
+                 android:theme="@style/AppTheme" android:label="测试应用">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
