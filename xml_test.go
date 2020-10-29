@@ -1,11 +1,11 @@
 package replace
 
 import (
-	`encoding/xml`
-	`errors`
-	`io/ioutil`
-	`os`
-	`testing`
+	"encoding/xml"
+	"errors"
+	"io/ioutil"
+	"os"
+	"testing"
 )
 
 const (
@@ -46,16 +46,14 @@ const (
 )
 
 type AndroidManifest struct {
-	XMLName xml.Name `xml:"android manifest"`
-
-	VersionName string `xml:"android versionName,attr"`
+	VersionName string `xml:"http://schemas.android.com/apk/res/android versionName,attr"`
 
 	Extra struct {
 		Username string `xml:"username"`
 	} `xml:"extra"`
 
 	Application struct {
-		AndroidLabel string `xml:"android label,attr"`
+		AndroidLabel string `xml:"http://schemas.android.com/apk/res/android label,attr"`
 	} `xml:"application"`
 }
 

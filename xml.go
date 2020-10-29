@@ -1,9 +1,9 @@
 package replace
 
 import (
-	`encoding/json`
+	"encoding/json"
 
-	`github.com/beevik/etree`
+	"github.com/beevik/etree"
 )
 
 const (
@@ -69,7 +69,7 @@ func (xr XMLReplace) Replace(filename string) (err error) {
 		switch element.Type {
 		case XMLReplaceTypeText:
 			for _, e := range xmlElements {
-				e.SetText(element.Value)
+				e.FindElement(element.Key).SetText(element.Value)
 			}
 		case XMLReplaceTypeAttr:
 			for _, e := range xmlElements {
