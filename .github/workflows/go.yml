@@ -1,0 +1,35 @@
+name: 替换
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+
+jobs:
+  build:
+    name: 编译
+    runs-on: ubuntu-latest
+    steps:
+    - name: 设置Golang环境
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.13
+
+    - name: 拉代码
+      uses: actions/checkout@v2
+
+    - name: 安装依赖
+      run: |
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+        fi
+
+    - name: 编译
+      run: go build -v .
+
+    - name: 测试
+      run: go test -v .
